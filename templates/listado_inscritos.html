@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Inscritos</title>
+</head>
+<body>
+    <h1>Listado de Inscritos</h1>
+    <table border="1">
+        <tr>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Turno</th>
+            <th>Seminarios</th>
+            <th>Acciones</th>
+        </tr>
+        {% for inscrito in inscritos %}
+        <tr>
+            <td>{{ inscrito['fecha'] }}</td>
+            <td>{{ inscrito['nombre'] }}</td>
+            <td>{{ inscrito['apellido'] }}</td>
+            <td>{{ inscrito['turno'] }}</td>
+            <td>{{ inscrito['seminarios'] }}</td>
+            <td>
+                <a href="{{ url_for('editar_inscrito', index=loop.index0) }}">Editar</a> |
+                <form action="{{ url_for('eliminar_inscrito', index=loop.index0) }}" method="POST" style="display:inline;">
+                    <button type="submit">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Nuevo Inscrito</a>
+</body>
+</html>
